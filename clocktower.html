@@ -139,6 +139,9 @@
         clock.addEventListener("mousedown", function() { dragging=true; event.preventDefault(); });
         clock.addEventListener("mouseup", function() { dragging=false; event.preventDefault(); });
         clock.addEventListener('mousemove', function(event) { if(dragging) { onClick(event); } });
+        clock.addEventListener("touchstart", function() { dragging=true; event.preventDefault(); });
+        clock.addEventListener("touchmove", function() { dragging=false; event.preventDefault(); });
+        clock.addEventListener('touchend', function(event) { if(dragging) { onClick(event); } });
 
     </script>
 </body>
