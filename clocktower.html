@@ -75,11 +75,15 @@
         }
 
         function setTimer(minutes) {
-            if(intervalId !== null) {
+            let started = intervalId !== null;
+            if(started) {
                 stopTimer();
             }
             currentMinutes = minutes;
             updateTimer(minutes);
+            if(started) {
+                startTimer();
+            }
         }
 
         function startTimer() {
@@ -105,16 +109,34 @@
             intervalId = null;
         }
 
-        updateTimer(60);
+        updateTimer(59);
 
-        clock.addEventListener("click", function() {
+        clock.addEventListener("click", function(event) {
             if(!chimePlayed) {
                 chime.play();
                 chime.pause();
                 chimePlayed = true;
-                console.log('Initial clicked!');
             }
-            console.log('Clicked!');
+
+            let boundedClickRect = clock.getBoundingClientRect();
+            let x = ((event.clientX - boundedClickRect.left) * 2 / clock.clientWidth) - 1;
+            let y = ((event.clientY - boundedClickRect.top) * 2 / clock.clientHeight) - 1;
+            let radius = Math.sqrt(x*x + y*y);
+
+            if(radius > 0.5 && radius < 0.75) {
+                // Clicked in time:
+                let minutes = ((Math.atan2(y, x) * 30 / Math.PI) + 75) % 60;
+                setTimer(minutes);
+            } else {
+                // Clicked outside time: 
+                if(intervalId === null) {
+                    if(currentMinutes <= 60) {
+                        startTimer();
+                    }
+                } else {
+                    stopTimer();
+                }
+            }
         });
 
     </script>
