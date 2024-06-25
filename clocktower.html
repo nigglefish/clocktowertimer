@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Blood on the Clocktower
+    </title>
+    <style>
+        body {
+            background-color: #000;
+        }
+        #clock {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vw;
+        }
+
+        #clock #face {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #clock #face {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #clock #big {
+            position: absolute;
+            left: calc(100% * 710 / 1620);
+            top: calc(100% * 10 / 1620);
+            width: calc(100% * 200 / 1620);
+            height: calc(100% * 1000 / 1620);
+            transform-origin: 50% 80%;
+            transform: rotate(0deg);
+        }
+        #clock #small {
+            position: absolute;
+            left: calc(100% * 710 / 1620);
+            top: calc(100% * 410 / 1620);
+            width: calc(100% * 200 / 1620);
+            height: calc(100% * 600 / 1620);
+            transform-origin: 50% 66.66667%;
+            transform: rotate(0deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">
+        <img id="face" src="face.png">
+        <img id="big" src="big.png">
+        <img id="small" src="small.png">
+    </div>
+    <script>
+        let clock = document.getElementById('clock');
+        let big = document.getElementById('big');
+        let small = document.getElementById('small');
+        let chime = new Audio('chime.mp3');
+        let chimePlayed = false;
+        let currentMinutes = 60;
+        let intervalId = null;
+
+        function updateTimer(minutes) {
+            currentMinutes = minutes;
+            big.style.transform = 'rotate(' + (minutes * 6) + 'deg)';
+            small.style.transform = 'rotate(' + (330 + minutes * 0.5) + 'deg)';
+        }
+
+        function setTimer(minutes) {
+            if(intervalId !== null) {
+                stopTimer();
+            }
+            currentMinutes = minutes;
+            updateTimer(minutes);
+        }
+
+        function startTimer() {
+            let startDate = new Date();
+            let startMinutes = currentMinutes;
+            updateTimer(startMinutes);
+            clearInterval(intervalId);
+            intervalId = setInterval(function() {
+                let now = new Date();
+                let elapsed = now - startDate;
+                let minutes = startMinutes + 5 * elapsed / 60000; // Time moves 5 times faster.
+                if(minutes >= 60) {
+                    minutes = 60;
+                    stopTimer();
+                    chime.play();
+                }
+                updateTimer(minutes);
+            }, 100);
+        }
+
+        function stopTimer() {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+
+        updateTimer(60);
+
+        clock.addEventListener("click", function() {
+            if(!chimePlayed) {
+                chime.play();
+                chime.pause();
+                chimePlayed = true;
+                console.log('Initial clicked!');
+            }
+            console.log('Clicked!');
+        });
+
+    </script>
+</body>
+</html>
