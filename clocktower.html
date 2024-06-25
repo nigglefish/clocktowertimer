@@ -52,24 +52,23 @@
             left: 0;
             bottom: 0;
             width: 100vw;
-            height: calc(100vw * 400 / 1620);
-            background: url("parchment.png");
+            height: calc(100vw * 300 / 1620);
+            background: url('parchment.png');
             background-size: cover;
         }
         #players #grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             grid-gap: 2vw;
             position: absolute;
-            left: 7vw;
-            bottom: 5vw;
-            width: 86vw;
-            height: calc((100vw * 400 / 1620) - 10vw);
-            --background-color: red;
+            left: 10vw;
+            bottom: 2vw;
+            width: 80vw;
+            height: calc((100vw * 300 / 1620) - 4vw);
         }
         #players #grid .number {
             grid-row: 1;
-            font-size: 12vw;
+            font-size: 10vw;
             justify-self: center;
             align-self: start;
             font-family: OldLondon, serif;
@@ -77,10 +76,16 @@
         }
         #players #grid .label {
             grid-row: 1;
-            font-size: 4vw;
+            font-size: 5vw;
             justify-self: center;
             align-self: end;
             font-family: OldLondon, serif;
+        }
+        .red {
+            color: #800;
+        }
+        .blue {
+            color: #008;
         }
     </style>
 </head>
@@ -92,17 +97,15 @@
     </div>
     <div id="players">
         <div id="grid">
-            <div class="number" id="player-count" style="grid-column:1; color:#222">99</div>
-            <div class="number" id="townsfolk-count" style="grid-column:2; color:#228">2</div>
-            <div class="number" id="outsider-count" style="grid-column:3; color:#228">1</div>
-            <div class="number" id="minion-count" style="grid-column:4; color:#822">4</div>
-            <div class="number" id="demon-count" style="grid-column:5; color:#822">1</div>
+            <div class="number blue" id="townsfolk-count" style="grid-column:1">2</div>
+            <div class="number blue" id="outsider-count" style="grid-column:2">1</div>
+            <div class="number red" id="minion-count" style="grid-column:3">4</div>
+            <div class="number red" id="demon-count" style="grid-column:4">1</div>
 
-            <div class="label" id="player-label" style="grid-column:1; color:#222">Players</div>
-            <div class="label" id="townsfolk-label" style="grid-column:2; color:#228">Townsfolk</div>
-            <div class="label" id="outsider-label" style="grid-column:3; color:#228">Outsider</div>
-            <div class="label" id="minion-label" style="grid-column:4; color:#822">Minion</div>
-            <div class="label" id="demon-label" style="grid-column:5; color:#822">Demon</div>
+            <div class="label blue" id="townsfolk-label" style="grid-column:1">Townsfolk</div>
+            <div class="label blue" id="outsider-label" style="grid-column:2">Outsider</div>
+            <div class="label red" id="minion-label" style="grid-column:3">Minion</div>
+            <div class="label red" id="demon-label" style="grid-column:4">Demon</div>
         </div>
     </div>
     <script>
@@ -118,21 +121,20 @@
         let currentPlayers = 5;
 
         const PLAYER_NUMBERS = [
-            [5, 3, 0, 1, 1],
-            [6, 3, 1, 1, 1],
-            [7, 5, 0, 1, 1],
-            [8, 5, 1, 1, 1],
-            [9, 5, 2, 1, 1],
-            [10, 7, 0, 2, 1],
-            [11, 7, 1, 2, 1],
-            [12, 7, 2, 2, 1],
-            [13, 9, 0, 3, 1],
-            [14, 9, 1, 3, 1],
-            [15, 9, 2, 3, 1],
+            [3, 0, 1, 1],
+            [3, 1, 1, 1],
+            [5, 0, 1, 1],
+            [5, 1, 1, 1],
+            [5, 2, 1, 1],
+            [7, 0, 2, 1],
+            [7, 1, 2, 1],
+            [7, 2, 2, 1],
+            [9, 0, 3, 1],
+            [9, 1, 3, 1],
+            [9, 2, 3, 1],
         ];
 
         playerData = [
-            [document.getElementById('player-count'), document.getElementById('player-label'), 'Player'],
             [document.getElementById('townsfolk-count'), document.getElementById('townsfolk-label'), 'Townsfolk'],
             [document.getElementById('outsider-count'), document.getElementById('outsider-label'), 'Outsider'],
             [document.getElementById('minion-count'), document.getElementById('minion-label'), 'Minion'],
@@ -217,11 +219,11 @@
             }
             currentPlayers = number;
             let numbers = PLAYER_NUMBERS[number - 5];
-            for(let i = 0; i < 5; i++) {
+            for(let i = 0; i < 4; i++) {
                 let [count, label, text] = playerData[i];
                 let number = numbers[i];
                 count.innerHTML = number;
-                if(number !== 1 & i !== 1) {
+                if(number !== 1 & i !== 0) {
                     text += 's';
                 }
                 label.innerHTML = text;
