@@ -136,12 +136,6 @@
         }
 
         clock.addEventListener('click', onClick);
-        clock.addEventListener('mousedown', function(event) { dragging=true; event.preventDefault(); });
-        clock.addEventListener('mouseup', function(event) { dragging=false; event.preventDefault(); });
-        clock.addEventListener('mousemove', function(event) { if(dragging) { onClick(event); } });
-        clock.addEventListener('touchstart', function(event) { dragging=true; event.preventDefault(); });
-        clock.addEventListener('touchmove', function(event) { dragging=false; event.preventDefault(); });
-        clock.addEventListener('touchend', function(event) { if(dragging) { onClick(event); } });
  
     </script>
 </body>
