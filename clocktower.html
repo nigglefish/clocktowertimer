@@ -17,19 +17,13 @@
             left: 0;
             width: 100vw;
             height: 100vw;
+            pointer-events: all;
         }
 
         #clock #face {
             position: relative;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        #clock #face {
-            position: absolute;
-            left: 0;
-            top: 0;
             width: 100%;
             height: 100%;
         }
@@ -67,6 +61,7 @@
         let chimePlayed = false;
         let currentMinutes = 60;
         let intervalId = null;
+        let dragging = false;
 
         function updateTimer(minutes) {
             currentMinutes = minutes;
@@ -109,9 +104,9 @@
             intervalId = null;
         }
 
-        updateTimer(59);
+        updateTimer(60);
 
-        clock.addEventListener("click", function(event) {
+        function onClick(event) {
             if(!chimePlayed) {
                 chime.play();
                 chime.pause();
@@ -137,7 +132,13 @@
                     stopTimer();
                 }
             }
-        });
+            event.preventDefault();
+        }
+
+        clock.addEventListener("click", onClick);
+        clock.addEventListener("mousedown", function() { dragging=true; event.preventDefault(); });
+        clock.addEventListener("mouseup", function() { dragging=false; event.preventDefault(); });
+        clock.addEventListener('mousemove', function(event) { if(dragging) { onClick(event); } });
 
     </script>
 </body>
