@@ -104,7 +104,7 @@
             intervalId = null;
         }
 
-        updateTimer(60);
+        updateTimer(59);
 
         function onClick(event) {
             if(!chimePlayed) {
@@ -135,14 +135,15 @@
             event.preventDefault();
         }
 
-        clock.addEventListener("click", onClick);
-        clock.addEventListener("mousedown", function() { dragging=true; event.preventDefault(); });
-        clock.addEventListener("mouseup", function() { dragging=false; event.preventDefault(); });
+        clock.addEventListener('click', onClick);
+        clock.addEventListener('mousedown', function(event) { dragging=true; event.preventDefault(); });
+        clock.addEventListener('mouseup', function(event) { dragging=false; event.preventDefault(); });
         clock.addEventListener('mousemove', function(event) { if(dragging) { onClick(event); } });
-        clock.addEventListener("touchstart", function() { dragging=true; event.preventDefault(); });
-        clock.addEventListener("touchmove", function() { dragging=false; event.preventDefault(); });
+        clock.addEventListener('touchstart', function(event) { dragging=true; event.preventDefault(); });
+        clock.addEventListener('touchmove', function(event) { dragging=false; event.preventDefault(); });
         clock.addEventListener('touchend', function(event) { if(dragging) { onClick(event); } });
-
+        clock.addEventListener('dragstart', function(event) { event.preventDefault(); });
+ 
     </script>
 </body>
 </html>
