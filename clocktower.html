@@ -104,8 +104,6 @@
             intervalId = null;
         }
 
-        updateTimer(55);
-
         function onClick(event) {
             if(!chimePlayed) {
                 chime.play();
@@ -136,6 +134,8 @@
         }
 
         clock.addEventListener('click', onClick);
+
+        updateTimer(60);
  
     </script>
 </body>
