@@ -118,7 +118,7 @@
             let y = ((event.clientY - boundedClickRect.top) * 2 / clock.clientHeight) - 1;
             let radius = Math.sqrt(x*x + y*y);
 
-            if(radius > 0.5 && radius < 0.75) {
+            if(radius > 0.46 && radius < 0.715) {
                 // Clicked in time:
                 let minutes = ((Math.atan2(y, x) * 30 / Math.PI) + 75) % 60;
                 setTimer(minutes);
