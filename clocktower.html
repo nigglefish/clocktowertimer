@@ -17,9 +17,7 @@
             left: 0;
             width: 100vw;
             height: 100vw;
-            pointer-events: all;
         }
-
         #clock #face {
             position: relative;
             top: 0;
@@ -45,6 +43,15 @@
             transform-origin: 50% 66.66667%;
             transform: rotate(0deg);
         }
+        #players {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100vw;
+            height: calc(100vw * 500 / 1620);
+            background: url("parchment.png");
+            background-size: cover;
+        }
     </style>
 </head>
 <body>
@@ -53,6 +60,7 @@
         <img id="big" src="big.png">
         <img id="small" src="small.png">
     </div>
+    <div id="players"></div>
     <script>
         let clock = document.getElementById('clock');
         let big = document.getElementById('big');
@@ -96,7 +104,7 @@
                     chime.play();
                 }
                 updateTimer(minutes);
-            }, 1000);
+            }, 100);
         }
 
         function stopTimer() {
