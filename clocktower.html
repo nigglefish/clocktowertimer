@@ -53,8 +53,9 @@
             bottom: 0;
             width: 100%;
             height: calc(100% * 300 / 2120);
-            background: url('parchment.png');
-            background-size: cover;
+            --background: url('parchment.png');
+            --background-size: cover;
+            background-color: rgba(0, 0, 0, 0.5);
         }
         #players #grid {
             display: grid;
@@ -82,10 +83,10 @@
             font-family: OldLondon, serif;
         }
         .red {
-            color: #611;
+            color: #D55;
         }
         .blue {
-            color: #116;
+            color: #55F;
         }
     </style>
 </head>
