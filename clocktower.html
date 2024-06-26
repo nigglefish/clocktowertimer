@@ -15,56 +15,56 @@
         body {
             background-color: #000;
         }
-        #clock {
+        #clocktower {
             position: absolute;
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vw;
+            height: calc(100vw * 2160 / 1620);
         }
-        #clock #face {
+        #clocktower #face {
             position: relative;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
         }
-        #clock #big {
+        #clocktower #big {
             position: absolute;
-            left: calc(100% * 710 / 1620);
-            top: calc(100% * 10 / 1620);
-            width: calc(100% * 200 / 1620);
-            height: calc(100% * 1000 / 1620);
-            transform-origin: 50% 80%;
+            left: calc(100% * (810 - 50) / 1620);
+            top: calc(100% * (810 - 450) / 2160);
+            width: calc(100% * 100 / 1620);
+            height: calc(100% * 450 / 2160);
+            transform-origin: 50% 100%;
             transform: rotate(0deg);
         }
-        #clock #small {
+        #clocktower #small {
             position: absolute;
-            left: calc(100% * 710 / 1620);
-            top: calc(100% * 410 / 1620);
-            width: calc(100% * 200 / 1620);
-            height: calc(100% * 600 / 1620);
-            transform-origin: 50% 66.66667%;
+            left: calc(100% * (810 - 50) / 1620);
+            top: calc(100% * (810 - 300) / 2160);
+            width: calc(100% * 100 / 1620);
+            height: calc(100% * 300 / 2160);
+            transform-origin: 50% 100%;
             transform: rotate(0deg);
         }
         #players {
             position: absolute;
             left: 0;
             bottom: 0;
-            width: 100vw;
-            height: calc(100vw * 300 / 1620);
+            width: 100%;
+            height: calc(100% * 300 / 2160);
             background: url('parchment.png');
             background-size: cover;
         }
         #players #grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
-            grid-gap: 2vw;
+            grid-gap: 2%;
             position: absolute;
-            left: 10vw;
-            bottom: 2vw;
-            width: 80vw;
-            height: calc((100vw * 300 / 1620) - 4vw);
+            left: 10%;
+            bottom: 10%;
+            width: 80%;
+            height: 80%;
         }
         #players #grid .number {
             grid-row: 1;
@@ -90,7 +90,7 @@
     </style>
 </head>
 <body>
-    <div id="clock">
+    <div id="clocktower">
         <img id="face" src="face.png">
         <img id="big" src="big.png">
         <img id="small" src="small.png">
@@ -108,8 +108,9 @@
             <div class="label red" id="demon-label" style="grid-column:4">Demon</div>
         </div>
     </div>
+
     <script>
-        let clock = document.getElementById('clock');
+        let clocktower = document.getElementById('clocktower');
         let big = document.getElementById('big');
         let small = document.getElementById('small');
         let chime = new Audio('chime.mp3');
@@ -117,7 +118,6 @@
         let players = document.getElementById('players');
         let currentMinutes = 60;
         let intervalId = null;
-        let dragging = false;
         let currentPlayers = 5;
 
         const PLAYER_NUMBERS = [
@@ -182,19 +182,19 @@
             intervalId = null;
         }
 
-        function onClockClick(event) {
+        function onClocktowerClick(event) {
             if(!chimePlayed) {
                 chime.play();
                 chime.pause();
                 chimePlayed = true;
             }
 
-            let boundedClickRect = clock.getBoundingClientRect();
-            let x = ((event.clientX - boundedClickRect.left) * 2 / clock.clientWidth) - 1;
-            let y = ((event.clientY - boundedClickRect.top) * 2 / clock.clientHeight) - 1;
+            let boundedClickRect = clocktower.getBoundingClientRect();
+            let x = ((event.clientX - boundedClickRect.left) * 2 / clocktower.clientWidth) - 1;
+            let y = ((event.clientY - boundedClickRect.top) * 2 / clocktower.clientWidth) - 1;
             let radius = Math.sqrt(x*x + y*y);
 
-            if(radius > 0.46 && radius < 0.715) {
+            if(radius > 0.25 && radius < 0.5) {
                 // Clicked in time:
                 let minutes = ((Math.atan2(y, x) * 30 / Math.PI) + 75) % 60;
                 setTimer(minutes);
@@ -238,10 +238,10 @@
             setPlayers(number);
         }
 
-        clock.addEventListener('click', onClockClick);
+        clocktower.addEventListener('click', onClocktowerClick);
         players.addEventListener('click', onPlayersClick);
 
-        updateTimer(60);
+        updateTimer(47);
         setPlayers(5);
  
     </script>
