@@ -20,7 +20,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: calc(100vw * 2160 / 1620);
+            height: calc(100vw * 2120 / 1620);
         }
         #clocktower #face {
             position: relative;
@@ -32,18 +32,18 @@
         #clocktower #big {
             position: absolute;
             left: calc(100% * (810 - 50) / 1620);
-            top: calc(100% * (810 - 450) / 2160);
+            top: calc(100% * (810 - 450) / 2120);
             width: calc(100% * 100 / 1620);
-            height: calc(100% * 450 / 2160);
+            height: calc(100% * 450 / 2120);
             transform-origin: 50% 100%;
             transform: rotate(0deg);
         }
         #clocktower #small {
             position: absolute;
             left: calc(100% * (810 - 50) / 1620);
-            top: calc(100% * (810 - 300) / 2160);
+            top: calc(100% * (810 - 300) / 2120);
             width: calc(100% * 100 / 1620);
-            height: calc(100% * 300 / 2160);
+            height: calc(100% * 300 / 2120);
             transform-origin: 50% 100%;
             transform: rotate(0deg);
         }
@@ -52,7 +52,7 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            height: calc(100% * 300 / 2160);
+            height: calc(100% * 300 / 2120);
             background: url('parchment.png');
             background-size: cover;
         }
@@ -241,7 +241,7 @@
         clocktower.addEventListener('click', onClocktowerClick);
         players.addEventListener('click', onPlayersClick);
 
-        updateTimer(47);
+        updateTimer(60);
         setPlayers(5);
  
     </script>
