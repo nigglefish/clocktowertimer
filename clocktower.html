@@ -10,7 +10,8 @@
     <style>
         @font-face {
             font-family: Blackletter;
-            src: url('blackletter.extrabold.ttf');
+            --src: url('blackletter.extrabold.ttf');
+            src: url('OldLondon.ttf');
         }
         body {
             background-color: #000;
@@ -66,16 +67,17 @@
         }
         #players #grid .number {
             grid-row: 1;
-            font-size: 8vw;
+            font-size: 10vw;
             justify-self: center;
             align-self: start;
             font-family: Blackletter, serif;
+            font-weight: bold;
             -webkit-text-stroke: 1vw #000;
             paint-order: stroke fill;        
         }
         #players #grid .label {
             grid-row: 1;
-            font-size: 4vw;
+            font-size: 5vw;
             justify-self: center;
             align-self: end;
             font-family: Blackletter, serif;
