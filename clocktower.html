@@ -16,7 +16,7 @@
         body {
             background-color: #000;
             height: 100%;
-            overflow-y: clip;
+            overflow-y: hidden;
         }
 
         #clocktower {
@@ -29,7 +29,7 @@
         
         @media screen and (min-width: 1000px) {
             #clocktower {
-                top: -22%;
+                top: -18.3%;
             }
         }
 
@@ -71,6 +71,7 @@
         @media screen and (min-width: 1000px) {
             #players {
                 bottom: 0vw;
+                height: calc(100vh * 300 / 1620);
             }
         }
 
@@ -83,14 +84,6 @@
             bottom: 10%;
             width: 80%;
             height: 80%;
-        }
-
-        @media screen and (min-width: 1000px) {
-            #players #grid {
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                left: 0%;
-                width: 100%;
-            }
         }
 
         #players #grid .number {
@@ -112,6 +105,18 @@
             -webkit-text-stroke: 1vw #000;
             paint-order: stroke fill;        
         }
+
+        @media screen and (min-width: 1000px) {
+            #players #grid .number {
+                font-size: 10vh;
+                -webkit-text-stroke: 1vh #000;
+            }
+            #players #grid .label {
+                font-size: 5vh;
+                -webkit-text-stroke: 1vh #000;
+            }
+        }
+
         .red {
             color: #F88;
         }
