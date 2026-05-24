@@ -25,7 +25,11 @@
             left: calc((100vw - 100vh * 1620 / 2120) / 2);
             width: calc(100vh * 1620 / 2120);
             height: 100vh;
-            overflow-y: hidden;
+            background: url("face.png");
+            background-size: cover;
+            background-position: top;
+            background-repeat: no-repeat;
+            container-type: inline-size;
         }
 
         #clocktower #face {
@@ -33,48 +37,35 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
         }
 
         #clocktower #big {
             position: absolute;
-            left: calc(100% * (810 - 50) / 1620);
-            top: calc(100% * (810 - 450) / 2120);
-            width: calc(100% * 100 / 1620);
-            height: calc(100% * 450 / 2120);
+            left: calc(100cqw * (810 - 50) / 1620);
+            top: calc(100cqw * (810 - 450) / 1620);
+            width: calc(100cqw * 100 / 1620);
+            height: calc(100cqw * 450 / 1620);
             transform-origin: 50% 100%;
             transform: rotate(0deg);
         }
         #clocktower #small {
             position: absolute;
-            left: calc(100% * (810 - 50) / 1620);
-            top: calc(100% * (810 - 300) / 2120);
-            width: calc(100% * 100 / 1620);
-            height: calc(100% * 300 / 2120);
+            left: calc(100cqw * (810 - 50) / 1620);
+            top: calc(100cqw * (810 - 300) / 1620);
+            width: calc(100cqw * 100 / 1620);
+            height: calc(100cqw * 300 / 1620);
             transform-origin: 50% 100%;
             transform: rotate(0deg);
         }
 
         #players {
             position: absolute;
-            top: 82vh;
+            top: 82cqh;
             left: 0;
-            width: 100%;
-            height: 16vh;
+            width: 100cqw;
+            height: 16cqh;
         }
 
-        @media screen and (orientation: landscape) {
-            #clocktower {
-                left: calc((100vw - 130vh * 1620 / 2120) / 2);
-                width: calc(130vh * 1620 / 2120);
-                height: 100vh;
-            }
-
-            #clocktower #face {
-                object-fit: cover;
-                object-position: top;
-            }
-        }
 
         #players #grid {
             display: grid;
@@ -89,22 +80,30 @@
 
         #players #grid .number {
             grid-row: 1;
-            font-size: 10vh;
+            font-size: 10cqh;
             justify-self: center;
             align-self: start;
             font-family: Blackletter, serif;
             font-weight: bold;
-            -webkit-text-stroke: 1vh #000;
+            -webkit-text-stroke: 1cqh #000;
             paint-order: stroke fill;        
         }
         #players #grid .label {
             grid-row: 1;
-            font-size: 5vh;
+            font-size: 5cqh;
             justify-self: center;
             align-self: end;
             font-family: Blackletter, serif;
-            -webkit-text-stroke: 1vh #000;
+            -webkit-text-stroke: 1cqh #000;
             paint-order: stroke fill;        
+        }
+
+        @media screen and (orientation: landscape) {
+            #clocktower {
+                left: calc((100vw - 130vh * 1620 / 2120) / 2);
+                width: calc(130vh * 1620 / 2120);
+                height: 100vh;
+            }
         }
 
         .red {
@@ -117,7 +116,6 @@
 </head>
 <body>
     <div id="clocktower">
-        <img id="face" src="face.png">
         <img id="big" src="big.png">
         <img id="small" src="small.png">
         <div id="players">
