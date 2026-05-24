@@ -25,14 +25,7 @@
             left: calc((100vw - 100vh * 1620 / 2120) / 2);
             width: calc(100vh * 1620 / 2120);
             height: 100vh;
-        }
-
-        @media screen and (orientation: landscape) {
-            #clocktower {
-                left: calc((100vw - 130vh * 1620 / 2120) / 2);
-                width: calc(130vh * 1620 / 2120);
-                height: 100vh;
-            }
+            overflow-y: hidden;
         }
 
         #clocktower #face {
@@ -72,9 +65,14 @@
 
         @media screen and (orientation: landscape) {
             #clocktower {
-                left: calc((100vw - 125vh * 1620 / 2120) / 2);
-                width: calc(125vh * 1620 / 2120);
-                height: 125vh;
+                left: calc((100vw - 130vh * 1620 / 2120) / 2);
+                width: calc(130vh * 1620 / 2120);
+                height: 100vh;
+            }
+
+            #clocktower #face {
+                object-fit: cover;
+                object-position: top;
             }
         }
 
