@@ -248,7 +248,7 @@
                 // Clicked in time:
                 let radians = Math.atan2(-x, y) + Math.PI;
                 clickClockface(radians);
-            } else {
+            } else if (radius <= 0.25) {
                 // Clicked outside time: 
                 if(intervalId === null) {
                     if(currentMinutes <= 60) {
