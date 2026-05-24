@@ -177,10 +177,18 @@
             [document.getElementById('demon-count'), document.getElementById('demon-label'), 'Demon'],
         ];
 
-        function updateTimer(minutes) {
+        function clickClockface(radians) {
+            let minutes = Math.round(12.0 - 6.0 * radians / Math.PI);
+            if (minutes == 0.0) {
+                minutes = 12.0;
+            }
+            setTimer(minutes);
+        }
+
+        function updateClockface(minutes) {
             currentMinutes = minutes;
-            big.style.transform = 'rotate(' + (minutes * 6) + 'deg)';
-            small.style.transform = 'rotate(' + (330 + minutes * 0.5) + 'deg)';
+            big.style.transform = 'rotate(' + (-360.0 * minutes) + 'deg)';
+            small.style.transform = 'rotate(' + (-30.0 * minutes) + 'deg)';
         }
 
         function setTimer(minutes) {
@@ -189,7 +197,7 @@
                 stopTimer();
             }
             currentMinutes = minutes;
-            updateTimer(minutes);
+            updateClockface(minutes);
             if(started) {
                 startTimer();
             }
@@ -198,19 +206,19 @@
         function startTimer() {
             let startDate = new Date();
             let startMinutes = currentMinutes;
-            updateTimer(startMinutes);
+            updateClockface(startMinutes);
             clearInterval(intervalId);
             intervalId = setInterval(function() {
                 let now = new Date();
                 let elapsed = now - startDate;
-                let minutes = startMinutes + 5 * elapsed / 60000; // Time moves 5 times faster.
-                if(minutes >= 60) {
-                    minutes = 60;
+                let minutes = startMinutes - elapsed / 60000;
+                if(minutes < 0) {
+                    minutes = 0;
                     stopTimer();
                     chime.play();
                 }
-                updateTimer(minutes);
-            }, 100);
+                updateClockface(minutes);
+            }, 50);
         }
 
         function stopTimer() {
@@ -232,8 +240,8 @@
 
             if(radius > 0.25 && radius < 0.5) {
                 // Clicked in time:
-                let minutes = ((Math.atan2(y, x) * 30 / Math.PI) + 75) % 60;
-                setTimer(minutes);
+                let radians = Math.atan2(-x, y) + Math.PI;
+                clickClockface(radians);
             } else {
                 // Clicked outside time: 
                 if(intervalId === null) {
@@ -277,7 +285,7 @@
         clocktower.addEventListener('click', onClocktowerClick);
         players.addEventListener('click', onPlayersClick);
 
-        updateTimer(60);
+        updateClockface(0);
         setPlayers(5);
  
     </script>
