@@ -67,7 +67,7 @@
         }
 
 
-        #players #grid {
+        #players .grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             grid-gap: 2%;
@@ -78,25 +78,26 @@
             height: 90%;
         }
 
-        #players #grid .number {
+        #players .grid .number {
             grid-row: 1;
             font-size: 10cqh;
             justify-self: center;
             align-self: start;
             font-family: Blackletter, serif;
             font-weight: bold;
-            -webkit-text-stroke: 0.5cqh #000;
-            paint-order: stroke fill;        
         }
-        #players #grid .label {
+        #players .grid .label {
             grid-row: 1;
             font-size: 5cqh;
             justify-self: center;
             align-self: end;
             font-family: Blackletter, serif;
-            -webkit-text-stroke: 0.5cqh #000;
+        }
+        #players .grid .shadow {
+            -webkit-text-stroke: 1.5cqw #000;
             paint-order: stroke fill;        
         }
+
 
         @media screen and (orientation: landscape) {
             #clocktower {
@@ -119,7 +120,18 @@
         <img id="big" src="big.png">
         <img id="small" src="small.png">
         <div id="players">
-            <div id="grid">
+            <div class="grid" id="grid-shadow">
+                <div class="number blue shadow" id="townsfolk-count-shadow" style="grid-column:1">2</div>
+                <div class="number blue shadow" id="outsider-count-shadow" style="grid-column:2">1</div>
+                <div class="number red shadow" id="minion-count-shadow" style="grid-column:3">4</div>
+                <div class="number red shadow" id="demon-count-shadow" style="grid-column:4">1</div>
+    
+                <div class="label blue shadow" id="townsfolk-label-shadow" style="grid-column:1">Townsfolk</div>
+                <div class="label blue shadow" id="outsider-label-shadow" style="grid-column:2">Outsider</div>
+                <div class="label red shadow" id="minion-label-shadow" style="grid-column:3">Minion</div>
+                <div class="label red shadow" id="demon-label-shadow" style="grid-column:4">Demon</div>
+            </div>
+            <div class="grid" id="grid" style="display:hidden">
                 <div class="number blue" id="townsfolk-count" style="grid-column:1">2</div>
                 <div class="number blue" id="outsider-count" style="grid-column:2">1</div>
                 <div class="number red" id="minion-count" style="grid-column:3">4</div>
@@ -156,6 +168,13 @@
             [9, 0, 3, 1],
             [9, 1, 3, 1],
             [9, 2, 3, 1],
+        ];
+
+        playerShadowData = [
+            [document.getElementById('townsfolk-count-shadow'), document.getElementById('townsfolk-label-shadow'), 'Townsfolk'],
+            [document.getElementById('outsider-count-shadow'), document.getElementById('outsider-label-shadow'), 'Outsider'],
+            [document.getElementById('minion-count-shadow'), document.getElementById('minion-label-shadow'), 'Minion'],
+            [document.getElementById('demon-count-shadow'), document.getElementById('demon-label-shadow'), 'Demon'],
         ];
 
         playerData = [
@@ -252,12 +271,17 @@
             currentPlayers = number;
             let numbers = PLAYER_NUMBERS[number - 5];
             for(let i = 0; i < 4; i++) {
-                let [count, label, text] = playerData[i];
+                let [count, label, text] = playerShadowData[i];
                 let number = numbers[i];
                 count.innerHTML = number;
                 if(number !== 1 & i !== 0) {
                     text += 's';
                 }
+                label.innerHTML = text;
+
+                [count, label, _text] = playerData[i];
+                number = numbers[i];
+                count.innerHTML = number;
                 label.innerHTML = text;
             }
         }
